@@ -26,6 +26,7 @@ export default class MjColumn extends BodyComponent {
     'inner-border-right': 'string',
     'inner-border-top': 'string',
     padding: 'unit(px,%){1,4}',
+    margin: 'unit(px,%){1,4}',
     'vertical-align': 'enum(top,bottom,middle)',
     width: 'unit(px,%)',
   }
@@ -38,12 +39,12 @@ export default class MjColumn extends BodyComponent {
   getChildContext() {
     const { containerWidth: parentWidth } = this.context
     const { nonRawSiblings } = this.props
-    const { borders, paddings } = this.getBoxWidths()
+    const { borders, paddings, margins } = this.getBoxWidths()
     const innerBorders =
       this.getShorthandBorderValue('left', 'inner-border') +
       this.getShorthandBorderValue('right', 'inner-border')
 
-    const allPaddings = paddings + borders + innerBorders
+    const allPaddings = paddings + margins + borders + innerBorders
 
     let containerWidth =
       this.getAttribute('width') ||
@@ -112,6 +113,7 @@ export default class MjColumn extends BodyComponent {
         'padding-right': this.getAttribute('padding-right'),
         'padding-bottom': this.getAttribute('padding-bottom'),
         'padding-left': this.getAttribute('padding-left'),
+        margin: this.getAttribute('margin'),
       },
     }
   }
@@ -209,6 +211,7 @@ export default class MjColumn extends BodyComponent {
       'padding-left',
       'padding-right',
       'padding-top',
+      'margin'
     ].some((attr) => this.getAttribute(attr) != null)
   }
 
@@ -270,6 +273,7 @@ export default class MjColumn extends BodyComponent {
                       'padding-bottom':
                         component.getAttribute('padding-bottom'),
                       'padding-left': component.getAttribute('padding-left'),
+                      margin: component.getAttribute('margin'),
                       'word-break': 'break-word',
                     },
                   })}

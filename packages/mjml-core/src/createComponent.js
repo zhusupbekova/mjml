@@ -144,6 +144,10 @@ export class BodyComponent extends Component {
       this.getShorthandAttrValue('padding', 'right') +
       this.getShorthandAttrValue('padding', 'left')
 
+      const margins =
+      this.getShorthandAttrValue('margin', 'right') +
+      this.getShorthandAttrValue('margin', 'left')
+
     const borders =
       this.getShorthandBorderValue('right') +
       this.getShorthandBorderValue('left')
@@ -152,7 +156,8 @@ export class BodyComponent extends Component {
       totalWidth: parsedWidth,
       borders,
       paddings,
-      box: parsedWidth - paddings - borders,
+      margins,
+      box: parsedWidth - paddings - margins - borders,
     }
   }
 
